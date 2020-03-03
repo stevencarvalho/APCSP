@@ -57,7 +57,7 @@ function draw() {
 }
 
 function mousePressed() {
-  if (dist(mouseX, mouseY, bananaImg.x, bananaImg.y) > 200) {
+  if (dist(mouseX, mouseY, bananaImg.x, bananaImg.y) > 400) {
     decreaseLives()
   }
 }
