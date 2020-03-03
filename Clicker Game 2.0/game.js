@@ -13,11 +13,13 @@ let winningNum = 5
 
 function setup() {
   // Setup Canvas
-  frameRate(2);
   createCanvas(windowWidth, windowHeight)
 
   bananaImg = createImg('https://mycodingclass.co/wp-content/uploads/2020/02/banana-300x150.png', 'banana image');
   bananaImg.size(200,100);
+
+  heading = createElement('h2','Click The Banana!');
+  heading.position(width / 3, height / 4);
 
 
 
@@ -25,20 +27,32 @@ function setup() {
   livesDisplay = createElement('h4', 'LIVES: ' + lives)
   livesDisplay.position(width / 20, height / 14)
 
+  scoreDisplay = createElement('h4', 'SCORE: ' + score)
+  scoreDisplay.position(width / 20, height / 10)
+
+
 
   // Creates Difficulty Slider
   const difficultyLabel = createElement('h4', 'DIFFICULTY')
-  difficultySlider = createSlider(0,360,100);
+  frameRate(1);
+  slider = createSlider(1,15,1);
+  slider.style('width','80px');
   
 }
 
 function draw() {
   // Adjust frameRate according to slider
- 
+  let val = slider.value();
+  frameRate(val);
+  
+
 
   // Randomly Position Banana
   bananaImg.position(random(width), random(height))
 
+  bananaImg.mousePressed(increaseScore)
+
+  checkLose();
 
 }
 
@@ -50,18 +64,33 @@ function mousePressed() {
 
 function increaseScore() {
 score = score + 1
+scoreDisplay.html('SCORE: ' + score);
+checkScore()
 
 }
 
 function decreaseLives() {
-score = score - 1
+lives = lives - 1
+livesDisplay.html('LIVES: ' + lives);
+checkScore()
 }
 
 function checkWin() {
-
-
+if(score===3){
+  goToWin();
+}
 }
 
 function checkLose() {
+if(lives===0){
+  goToLose();
+}
+}
 
+function goToWin(){
+  window.location.href = (win.html);
+}
+
+function goToLose(){
+  window.location.href = (lose.html);
 }
