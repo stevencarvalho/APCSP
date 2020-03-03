@@ -14,7 +14,7 @@ let winningNum = 5
 function setup() {
   // Setup Canvas
   createCanvas(windowWidth, windowHeight)
-
+  background('green');
   bananaImg = createImg('https://mycodingclass.co/wp-content/uploads/2020/02/banana-300x150.png', 'banana image');
   bananaImg.size(200,100);
 
@@ -34,10 +34,12 @@ function setup() {
 
   // Creates Difficulty Slider
   const difficultyLabel = createElement('h4', 'DIFFICULTY')
+  difficultyLabel.position(width / 8, height / 15);
   frameRate(1);
   slider = createSlider(1,15,1);
   slider.style('width','80px');
-  
+  slider.position( width / 8, height / 10)
+
 }
 
 function draw() {
@@ -52,8 +54,6 @@ function draw() {
 
   bananaImg.mousePressed(increaseScore)
 
-  checkLose();
-
 }
 
 function mousePressed() {
@@ -65,32 +65,28 @@ function mousePressed() {
 function increaseScore() {
 score = score + 1
 scoreDisplay.html('SCORE: ' + score);
-checkScore()
+
+checkWin()
 
 }
 
 function decreaseLives() {
 lives = lives - 1
 livesDisplay.html('LIVES: ' + lives);
-checkScore()
+
+checkLose()
+
 }
 
 function checkWin() {
-if(score===3){
-  goToWin();
+if(score===winningNum){
+  window.location.href = ("win.html");
 }
 }
 
 function checkLose() {
 if(lives===0){
-  goToLose();
+  window.location.href = ("lose.html");
 }
 }
 
-function goToWin(){
-  window.location.href = (win.html);
-}
-
-function goToLose(){
-  window.location.href = (lose.html);
-}
